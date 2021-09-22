@@ -1,0 +1,19 @@
+<%- include("../partials/header.ejs")%>
+<div class = "connections_class">
+    <% if (categoryNames) { %>
+        <h3> Select an event to see the event details</h3>
+        <% for(var i=0; i<categoryNames.length; i++){ %>
+            <h2><%= categoryNames[i]%></h2>
+            <ul>
+                <% for(var j=0; j<events.length; j++){
+                        if(events[j].category == categoryNames[i]){ %>
+                        <li><a href = '/events/<%= events[j].id %>'> <%= events[j].event_title %> </a></li>
+                    <%}
+                }%>
+            </ul>
+        <%}%>
+    <%} else { %>
+        <h2>There are no events currently</h2>
+    <%}%>
+    </div>
+<%- include("../partials/footer.ejs")%>    

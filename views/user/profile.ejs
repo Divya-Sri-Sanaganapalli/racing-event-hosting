@@ -1,0 +1,67 @@
+
+<%- include('../partials/header.ejs')%>
+<div class = "content-user">
+    <h2>Welcome, <%=user.firstName%></h2>
+    <% if (categoryNames) { %>
+        <p> You have created the following events</p><br/>
+    <div class = "profile">
+    <table class = 'profile-table'> 
+        <tr>
+            <th>Events</th>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+    <% for(var i=0; i<categoryNames.length; i++){ %>
+        <% for(var j=0; j<events.length; j++){
+            if(events[j].category == categoryNames[i]){ %>
+                <tr>
+                    <td>
+                        <a href = '/events/<%= events[j].id%>'><%=events[j].event_title%></a>
+                    </td>
+                    <td><%= categoryNames[i]%></td>
+                    <td>
+                        <form>
+                            <button class = "button-color" type = "submit" formmethod = "GET" formaction="/events/<%= events[j].id%>/edit">Update</button>
+                            <button class = "button-color" type = "submit" formmethod = "POST" formaction="/events/<%= events[j].id%>?_method=DELETE">Delete</button>
+                        </form>
+                    </td>
+                    </tr>
+                <%}
+            }%>
+    <%} %>
+</table>
+<%} else{ %>
+    <p> You have not created any events</p>
+<% } %>
+
+<h2><%=userName%> RSVP's</h2>
+<% if(rsvpArr.length > 0){%>
+    <table class = 'profile-table'>
+        <tr>
+            <th>Events</th>
+            <th>Category</th>
+            <th>Going?</th>
+            <th>Actions</th>
+        </tr>
+    <% for(var i=0; i<rsvpArr.length; i++) {%>
+    <tr>
+        <td><a><%= rsvpArr[i].eventID.event_title %></a></td>
+        <td><a><%= rsvpArr[i].eventID.category%></a></td>
+        <td><%= rsvpArr[i].status%></td>
+        <td>
+            <form>
+                <button class = "button-color" type = "submit" formmethod="GET" formaction = "/events/<%= rsvpArr[i].eventID._id%>">Update</button>
+                <button class = "button-color" type = "submit" formmethod="POST" formaction = "/events/<%= rsvpArr[i].eventID._id%>/rsvp_del">Delete</button>
+            </form>
+        </td>
+    </tr>
+    <%}%>
+    </table>
+<%} else {%>
+    <p> You have not RSVPed any event</p>
+    <%}%>
+</div>
+</div>
+ <%- include('../partials/footer.ejs')%>
+
+    

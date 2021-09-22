@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset = "UTF-8">
+        <title>RACE HEAT</title>
+        <link rel="icon" href="/Images/Logo.png">
+        <link rel="stylesheet" type="text/css" href="/CSS/TaskListClassFile.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body class ="mylistclass">
+        <!--Header-->
+        <header>	
+            <div>
+            <a href="/">
+                <img src="/Images/Logo.png" alt="Race HEAT logo" height = "130" width = "150">
+            </a>
+            <!--Navigation Bar  -->
+            <h1 class="mainheader"> RACE HEAT </h1>
+            <div class="navbar">
+                <a  href="/events/new"> Start a race event | </a>
+                <%if(!user){%>
+                    <a href='/users/new'>Sign Up |</a>
+                    <a href='/users/login'>Login</a>
+                <%}
+                else{%>
+                    <a href='/users/profile'>Profile |</a>
+                    <a href='/users/logout'>Logout</a>
+                <%}%>
+            </div>
+            </div>            
+        </header>
+            <!--Sub Navigation Bar-->
+        <div class = "container">
+            <a href="/events">Events</a>
+            <% if(user && userName){ %>
+                <small class=userName> Welcome, <%= userName%></small>
+            <%}%>
+        </div>
+        <% if(errorMessages.length > 0) {%>
+            <% errorMessages.forEach(message=>{%>
+                <div class='error'>
+                    <%=message%>
+                </div>
+                <%});%>
+                    <%}%>
+        
+        <% if(successMessages.length > 0) {%>
+        
+        <% successMessages.forEach(message=>{%>
+            <div class='success'>
+                <%=message%>
+            </div>
+            <%});%>
+                <%}%>
+                                

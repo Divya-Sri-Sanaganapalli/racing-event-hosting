@@ -1,0 +1,36 @@
+<%- include("../partials/header.ejs")%>  
+        <div class="subcategory1">
+		
+            <h2><%= event.event_title%></h2>
+        <div class="buttons">
+            <p><%= rsvpSize%> people are attending this event</p>
+            <%if(user == event.host._id){%>
+            <form>
+            <button class = "button-color" type = "submit" formmethod = "GET" formaction="/events/<%= event.id%>/edit">Update</button>
+            <button class = "button-color" type = "submit" formmethod = "POST" formaction="/events/<%= event.id%>?_method=DELETE">Delete</button>
+            </form>
+            <%}else{%>
+            <form>
+            <button class = "yes" type = "submit" formmethod = "POST" name = status value = 'YES' formaction= "/events/<%= event.id%>/rsvp">YES</button>
+            <button class = "no" type = "submit" formmethod = "POST" name = status value = 'NO' formaction= "/events/<%= event.id%>/rsvp">NO</button>
+            <button class = "maybe" type = "submit" formmethod = "POST" name = status value = 'MAYBE' formaction = "/events/<%= event.id%>/rsvp">MAYBE</button>
+            </form>
+            <%}%>
+        </div>
+        <br>
+        <div class = "container-img">
+            <div class = task1-img>
+            <img src="<%= event.image%>" alt = task1-image width="350" height="200"/>
+            </div>
+            <div class = text-img>
+                 <h4>Hosted By <%= event.host.firstName + ' ' +event.host.lastName%></h4>
+                 <h4>When: <%= event.Date%></h4>
+                 <h4>Timings: <%= event.start_time%> - <%= event.end_time%></h4>
+                 <h4>Where: <%= event.location%></h4>
+            </div>
+            </div>
+            <br>
+            <h3>Event Description</h3>
+            <p><%= event.Description%></p>
+        </div>
+ <%- include("../partials/footer.ejs")%>
